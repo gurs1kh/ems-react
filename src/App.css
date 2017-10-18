@@ -1,0 +1,32 @@
+* {
+  font-family: Calibri, sans-serif;
+}
+
+/*html, body {margin: 0; height: 100%; overflow: hidden}*/
+
+.event-list {
+  overflow: auto;
+}
+
+.list-item {
+  overflow: hidden;
+}
+
+.header {
+  overflow: hidden;
+}
+
+.event-item {
+  float: left;
+  padding-right: 2em;
+  padding-bottom: 1em;
+}
+
+.event-time {
+  text-align: right;
+}
+
+.date-header {
+  background-color: #F5F5F5;
+  padding: -10px;
+}
