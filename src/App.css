@@ -1,18 +1,32 @@
 * {
   font-family: Calibri, sans-serif;
-}
-
-/*html, body {margin: 0; height: 100%; overflow: hidden}*/
-
-.event-list {
-  overflow: auto;
-}
-
-.list-item {
-  overflow: hidden;
+  color: black;
 }
 
 .header {
+  cursor: pointer;
+  /*overflow: hidden;*/
+}
+
+.fa {
+  color: blue;
+}
+
+.fa-chevron-up {
+  font-size: 0.75em;
+}
+
+.action-icons div {
+  float: left;
+  padding-top: 0.5em;
+  padding-right: 2em;
+}
+
+.event-list {
+  /*overflow: auto;*/
+}
+
+.list-item {
   overflow: hidden;
 }
 

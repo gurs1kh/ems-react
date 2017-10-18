@@ -9,7 +9,7 @@ import Header from './components/Header';
 import Calendar from './components/Calendar';
 import EventList from './components/EventList';
 
-const bookings = bookingsJson.bookings;
+let bookings = bookingsJson.bookings;
 
 class App extends Component {
   constructor(props) {
@@ -17,6 +17,7 @@ class App extends Component {
     this.toggleCalendar = this.toggleCalendar.bind(this);
     this.updateTitleDate = this.updateTitleDate.bind(this);
     this.makeSearch = this.makeSearch.bind(this);
+    this.addEvent = this.addEvent.bind(this);
     this.state = { calendarOpened: false, selectedMonth: Date.now(), events: bookings };
   }
 
@@ -38,6 +39,10 @@ class App extends Component {
     });
   }
 
+  addEvent(event) {
+    
+  }
+
   render() {
     let calendar = this.state.calendarOpened ? <Calendar onDateSelect={this.updateTitleDate} /> : "";
     return (
@@ -45,7 +50,8 @@ class App extends Component {
         <div id="app">
           <Header onTitleClick={this.toggleCalendar}
                   selectedMonth={this.state.selectedMonth}
-                  onMakeSearch={this.makeSearch} />
+                  onMakeSearch={this.makeSearch}
+                  onAddEvent={this.addEvent} />
           { calendar }
           <EventList events={this.state.events}/>
         </div>
