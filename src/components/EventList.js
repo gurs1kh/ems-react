@@ -8,7 +8,11 @@ class EventList extends Component {
   render() {
     let eventsByDate = this.getEventsByDate(this.props.events)
     if (eventsByDate.length <= 0) {
-      eventsByDate = (<div>There are no scheduled events</div>);
+      eventsByDate = (
+        <div style={{padding:"1em"}}>
+          There are no scheduled events with the given parameters
+        </div>
+      );
     }
     return (
       <List className="event-list">
@@ -41,8 +45,8 @@ class EventList extends Component {
   }
 }
 
-function getDate(timeStamp) {
-  return new Date(new Date(timeStamp).toDateString()).getTime();
+function getDate(timestamp) {
+  return new Date(new Date(timestamp).toDateString()).getTime();
 }
 
 export default EventList;

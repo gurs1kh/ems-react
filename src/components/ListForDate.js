@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Divider from 'material-ui/Divider';
 import Subheader from 'material-ui/Subheader';
-import ScrollableAnchor from 'react-scrollable-anchor';
 import dateFormat from 'dateformat';
 
 import Event from './Event';
@@ -15,12 +14,10 @@ class ListForDate extends Component {
       )
     })
     return (
-      <ScrollableAnchor id={`time${date}`}>
-        <div>
-          <DateHeader date={date}/>
-          {events}
-        </div>
-      </ScrollableAnchor>
+      <div>
+        <DateHeader date={date}/>
+        {events}
+      </div>
     );
   }
 }
@@ -33,18 +30,22 @@ const DateHeader = (props) => (
   </div>
 )
 
-function formatDate(timeStamp) {
-  let date = new Date(timeStamp);
-  let formattedDate = dateFormat(date, "ddd mmm dd").toUpperCase();
-  if (sameDate(timeStamp, Date.now())) {
+function formatDate(timestamp) {
+  let date = new Date(timestamp);
+  let format = "ddd mmm dd";
+  if (date.getFullYear() !== new Date().getFullYear()) {
+    format += ' yyyy';
+  }
+  let formattedDate = dateFormat(date, format).toUpperCase();
+  if (sameDate(timestamp, Date.now())) {
     formattedDate = "TODAY " + formattedDate;
   }
   return formattedDate;
 }
 
-function sameDate(timeStamp1, timeStamp2) {
-  let date1 = new Date(timeStamp1).toDateString();
-  let date2 = new Date(timeStamp2).toDateString();
+function sameDate(timestamp1, timestamp2) {
+  let date1 = new Date(timestamp1).toDateString();
+  let date2 = new Date(timestamp2).toDateString();
   return date1 === date2;
 }
 

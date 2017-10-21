@@ -3,13 +3,16 @@
   color: black;
 }
 
+body {
+  max-height: 100%;
+}
+
 .header {
   cursor: pointer;
-  /*overflow: hidden;*/
 }
 
 .fa {
-  color: blue;
+  color: #4B85E8;
 }
 
 .fa-chevron-up {
@@ -20,10 +23,6 @@
   float: left;
   padding-top: 0.5em;
   padding-right: 2em;
-}
-
-.event-list {
-  /*overflow: auto;*/
 }
 
 .list-item {

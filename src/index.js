@@ -4,5 +4,8 @@ import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import bookingsJson from './bookings';
+let bookings = bookingsJson.bookings;
+
+ReactDOM.render(<App bookings={bookings}/>, document.getElementById('root'));
 registerServiceWorker();

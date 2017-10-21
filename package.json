@@ -8,6 +8,7 @@
     "immutable": "^3.8.2",
     "material-ui": "^0.19.4",
     "material-ui-search-bar": "^0.4.0",
+    "rc-calendar": "^9.1.10",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-fontawesome": "^1.6.1",

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
+import 'react-infinite-calendar/styles.css';
 import InfiniteCalendar from 'react-infinite-calendar';
-import { goToAnchor } from 'react-scrollable-anchor'
 
 class Calendar extends Component {
   render() {
@@ -10,18 +10,12 @@ class Calendar extends Component {
         height={window.innerHeight / 3}
         selectedDate={Date.now()}
         keyboardSupport={true}
-        displayOptions={{
-          showHeader: true
-        }}
-        onSelect={this.scrollTo.bind(this)}
+        displayOptions={{ showHeader: false, showTodayHelper: false}}
+        theme={{ selectionColor: '#4B85E8', weekdayColor: '#F5F5F5', textColor: { default:  'white' } }}
+        onSelect={this.props.onDateSelect}
+        onScroll={this.props.onScroll}
       />
     )
-  }
-
-  scrollTo(date) {
-    let timeStamp = new Date(date).getTime();
-    goToAnchor(`time${timeStamp}`);
-    this.props.onDateSelect(timeStamp);
   }
 }
 

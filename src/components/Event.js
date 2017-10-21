@@ -11,7 +11,7 @@ class Event extends Component {
     let end = new Date(event.end).getTime();
     let startTime = formatTime(start);
     let endTime = formatTime(end);
-    let length = timeLength(end - start);
+    let length = (end - start >= 0) ? timeLength(end - start) : 0;
     return (
       <div>
         <ListItem className='list-item list'>
@@ -31,8 +31,8 @@ class Event extends Component {
   }
 }
 
-function formatTime(timeStamp) {
-  let date = new Date(timeStamp);
+function formatTime(timestamp) {
+  let date = new Date(timestamp);
   return dateFormat(date, "h:MM TT");
 }
 

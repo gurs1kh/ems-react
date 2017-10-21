@@ -12,12 +12,13 @@ class Header extends Component {
 
   toggleSearch = () => {
     this.setState({ searching: !this.state.searching });
+    this.props.toggleSearch();
   }
 
   render() {
     let search = this.state.searching
         ? <SearchBar onChange={this.props.onMakeSearch}
-                     onRequestSearch={this.props.onMakeSearch} />
+                     onRequestSearch={function(){}} />
         : "";
     let selectedMonth = dateFormat(this.props.selectedMonth, "mmmm yyyy");
     return (

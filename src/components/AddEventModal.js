@@ -36,8 +36,9 @@ class AddEventModal extends Component {
   updateComplete = () => {
     let state = this.state;
     let complete = Object.keys(state).filter(function(key) {
-      return key !== "complete" && state[key] === "";
+      return key !== "complete" && key !== "roomName" && state[key] === "";
     }).length <= 0;
+    complete = complete && this.state.startTime < this.state.endTime;
     this.setState({ complete : complete });
   }
 
