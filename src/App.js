@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './App.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import { goToTop } from 'react-scrollable-anchor';
 
 import Header from './components/Header';
 import Calendar from './components/Calendar';
@@ -12,11 +11,14 @@ import AddEventModal from './components/AddEventModal.js';
 class App extends Component {
   constructor(props) {
     super(props);
+    let bookings = props.bookings.sort(function(a, b) {
+      return new Date(a.start) - new Date(b.start);
+    });
     this.state = {
       calendarOpened: false,
       selectedMonth: Date.now(),
-      events: props.bookings,
-      currentEvents: props.bookings,
+      events: bookings,
+      currentEvents: bookings,
       addingEvent: false,
     };
   }
@@ -75,7 +77,12 @@ class App extends Component {
     let end = parseDateTime(date, endTime);
     console.log(eventName, roomName, start, end);
     this.setState(function(prev) {
-      return { events: prev.events.push({ eventName, roomName, start, end }) };
+      let events = prev.events;
+      events.push({ eventName, roomName, start, end });
+      events.sort(function(a, b) {
+        return new Date(a.start) - new Date(b.start);
+      });
+      return { event: events };
     });
   }
 
@@ -110,5 +117,4 @@ function parseDateTime(date, time) {
   return `${new Date(date).toDateString()} ${new Date(time).toTimeString()}`;
 }
 
-goToTop();
 export default App;
