@@ -3,6 +3,7 @@ import List from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import Subheader from 'material-ui/Subheader';
 import dateFormat from 'dateformat';
+import Infinite from 'react-infinite';
 
 import ListForDate from './ListForDate';
 
@@ -11,16 +12,23 @@ class EventList extends Component {
     let eventsByDate = this.getEventsByDate(this.props.events)
     if (eventsByDate.length <= 0) {
       eventsByDate = (
-        <div style={{padding:"1em"}}>
+        <div className="no-event">
           There are no scheduled events with the given parameters
         </div>
       );
     }
+    //a bit hacky, should have a better way to handle this
+    let height = this.props.isCalendarOpened
+                      ? (window.innerHeight - 180) * 2 / 3
+                      : window.innerHeight - 65;
+    if (this.props.isSearching) height -= 48;
     return (
-      <List className="event-list" style={{maxHeight: '100%', overflow: 'auto'}}>
-        <Subheader></Subheader> {/* Needed to prevent top padding */}
-        { eventsByDate }
-      </List>
+      <Infinite containerHeight={height} elementHeight={[1000]}>
+        <List className="event-list">
+          <Subheader></Subheader> {/* Needed to prevent top padding */}
+          { eventsByDate }
+        </List>
+      </Infinite>
     );
   }
 

@@ -29,6 +29,10 @@ body {
   overflow: hidden;
 }
 
+.no-event {
+  padding: 1em;
+}
+
 .event-item {
   float: left;
   padding-right: 2em;

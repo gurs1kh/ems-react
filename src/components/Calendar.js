@@ -8,7 +8,6 @@ class Calendar extends Component {
       <InfiniteCalendar
         width={window.innerWidth}
         height={window.innerHeight / 3}
-        selectedDate={Date.now()}
         keyboardSupport={true}
         displayOptions={{ showHeader: false, showTodayHelper: false}}
         theme={{ selectionColor: '#4B85E8', weekdayColor: '#F5F5F5', textColor: { default:  'white' } }}

@@ -20,6 +20,7 @@ class App extends Component {
       events: bookings,
       currentEvents: bookings,
       addingEvent: false,
+      searching: false,
     };
   }
 
@@ -55,6 +56,7 @@ class App extends Component {
   }
 
   toggleSearch = () => {
+    this.setState({ searching: !this.state.searching });
     this.setState({ currentEvents: this.state.events });
   }
 
@@ -85,6 +87,11 @@ class App extends Component {
       return { event: events };
     });
   }
+  resize = () => this.forceUpdate()
+
+  componentDidMount() {
+    window.addEventListener('resize', this.resize);
+  }
 
   render() {
     let calendar = "";
@@ -106,7 +113,9 @@ class App extends Component {
                   onMakeSearch={this.makeSearch}
                   onToggleAddEvent={this.toggleAddEvent} />
           { calendar }
-          <EventList events={this.state.currentEvents}/>
+          <EventList events={this.state.currentEvents}
+                     isCalendarOpened={this.state.calendarOpened}
+                     isSearching={this.state.searching}/>
         </div>
       </MuiThemeProvider>
     );
