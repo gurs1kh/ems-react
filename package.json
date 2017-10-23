@@ -16,7 +16,7 @@
     "react-infinite-any-height": "^2.0.1",
     "react-infinite-calendar": "^2.3.1",
     "react-scripts": "1.0.14",
-    "time-length": "^0.9.1"
+    "timediff": "^1.1.1"
   },
   "scripts": {
     "start": "react-scripts start",

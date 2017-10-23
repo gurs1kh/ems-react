@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Divider, ListItem } from 'material-ui';
-import timeLength from 'time-length';
 import dateFormat from 'dateformat';
+import timediff from 'timediff'
 
 class Booking extends Component {
   render() {
@@ -10,7 +10,11 @@ class Booking extends Component {
     let end = new Date(booking.end);
     let startTime = dateFormat(start, "h:MM TT");
     let endTime = dateFormat(end, "h:MM TT");;
-    let length = timeLength(end - start);
+    let diff = timediff(start, end);
+    let length = `${diff.hours}h${diff.minutes}m`;
+    if (diff.minutes) {
+      length += ``;
+    }
 
     return (
       <div>
