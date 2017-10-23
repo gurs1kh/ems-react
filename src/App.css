@@ -29,17 +29,17 @@ body {
   overflow: hidden;
 }
 
-.no-event {
+.no-bookings {
   padding: 1em;
 }
 
-.event-item {
+.booking-item {
   float: left;
   padding-right: 2em;
   padding-bottom: 1em;
 }
 
-.event-time {
+.booking-time {
   text-align: right;
 }
 

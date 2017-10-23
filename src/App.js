@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import { MuiThemeProvider, getMuiTheme } from 'material-ui/styles';
 
-import Header from './components/Header';
-import Calendar from './components/Calendar';
-import EventList from './components/EventList';
-import AddEventModal from './components/AddEventModal.js';
+import { Header, Calendar, BookingList, AddBookingModal } from './components';
+
+import { parseDateTime } from './util/date-util.js';
 
 class App extends Component {
   constructor(props) {
@@ -17,9 +15,9 @@ class App extends Component {
     this.state = {
       calendarOpened: false,
       selectedMonth: Date.now(),
-      events: bookings,
-      currentEvents: bookings,
-      addingEvent: false,
+      bookings: bookings,
+      currentBookings: bookings,
+      addBooking: false,
       searching: false,
     };
   }
@@ -44,47 +42,47 @@ class App extends Component {
   }
 
   updateDateSelected = (timestamp) => {
-    let currentEvents;
+    let currentBookings;
     if (timestamp) {
-      currentEvents = this.state.events.filter(function(event) {
-        return new Date(event.start).toDateString() === new Date(timestamp).toDateString();
+      currentBookings = this.state.bookings.filter(function(booking) {
+        return new Date(booking.start).toDateString() === new Date(timestamp).toDateString();
       });
     } else {
-      currentEvents = this.state.events;
+      currentBookings = this.state.bookings;
     }
-    this.setState({ currentEvents: currentEvents });
+    this.setState({ currentBookings: currentBookings });
   }
 
   toggleSearch = () => {
     this.setState({ searching: !this.state.searching });
-    this.setState({ currentEvents: this.state.events });
+    this.setState({ currentBookings: this.state.bookings });
   }
 
   makeSearch = (phrase) => {
     this.setState({
-      currentEvents: this.state.events.filter(function(event) {
-        let nameContains = event.eventName.toLowerCase().indexOf(phrase) >= 0;
-        let roomContains = event.roomName.toLowerCase().indexOf(phrase) >= 0;
+      currentBookings: this.state.bookings.filter(function(booking) {
+        let nameContains = booking.eventName.toLowerCase().indexOf(phrase) >= 0;
+        let roomContains = booking.roomName.toLowerCase().indexOf(phrase) >= 0;
         return nameContains || roomContains;
       })
     });
   }
 
-  toggleAddEvent = () => {
-    this.setState({ addingEvent: !this.state.addingEvent });
+  toggleAddBooking = () => {
+    this.setState({ addBooking: !this.state.addBooking });
   }
 
-  addEvent = ({ eventName, roomName, date, startTime, endTime }) => {
+  addBooking = ({ eventName, roomName, date, startTime, endTime }) => {
     let start = parseDateTime(date, startTime);
     let end = parseDateTime(date, endTime);
     console.log(eventName, roomName, start, end);
     this.setState(function(prev) {
-      let events = prev.events;
-      events.push({ eventName, roomName, start, end });
-      events.sort(function(a, b) {
+      let bookings = prev.bookings;
+      bookings.push({ eventName, roomName, start, end });
+      bookings.sort(function(a, b) {
         return new Date(a.start) - new Date(b.start);
       });
-      return { event: events };
+      return { booking: bookings };
     });
   }
   resize = () => this.forceUpdate()
@@ -104,26 +102,22 @@ class App extends Component {
     return (
       <MuiThemeProvider muiTheme={getMuiTheme()}>
         <div id="app">
-          <AddEventModal show={this.state.addingEvent}
-                         onClose={this.toggleAddEvent}
-                         onSubmit={this.addEvent} />
+          <AddBookingModal show={this.state.addBooking}
+                         onClose={this.toggleAddBooking}
+                         onSubmit={this.addBooking} />
           <Header onTitleClick={this.toggleCalendar}
                   selectedMonth={this.state.selectedMonth}
                   toggleSearch={this.toggleSearch}
                   onMakeSearch={this.makeSearch}
-                  onToggleAddEvent={this.toggleAddEvent} />
+                  onToggleAddBooking={this.toggleAddBooking} />
           { calendar }
-          <EventList events={this.state.currentEvents}
+          <BookingList bookings={this.state.currentBookings}
                      isCalendarOpened={this.state.calendarOpened}
                      isSearching={this.state.searching}/>
         </div>
       </MuiThemeProvider>
     );
   }
-}
-
-function parseDateTime(date, time) {
-  return `${new Date(date).toDateString()} ${new Date(time).toTimeString()}`;
 }
 
 export default App;

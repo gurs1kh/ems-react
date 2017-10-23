@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
-import AppBar from 'material-ui/AppBar';
-import FontAwesome from 'react-fontawesome'
+import { AppBar } from 'material-ui';
 import SearchBar from 'material-ui-search-bar'
+import FontAwesome from 'react-fontawesome'
 import dateFormat from 'dateformat';
+
+
+const Icon = (props) => (
+  <FontAwesome name={props.name} size={props.size || '2x'} />
+)
 
 class Header extends Component {
   constructor(props) {
@@ -35,7 +40,7 @@ class Header extends Component {
           iconElementRight={
             <div className="header action-icons">
               <div onClick={this.toggleSearch}><Icon name='search'/></div>
-              <div onClick={this.props.onToggleAddEvent}><Icon name='plus' /></div>
+              <div onClick={this.props.onToggleAddBooking}><Icon name='plus' /></div>
             </div>
           } />
         {search}
@@ -43,9 +48,5 @@ class Header extends Component {
     );
   }
 }
-
-const Icon = (props) => (
-  <FontAwesome name={props.name} size={props.size || '2x'} />
-)
 
 export default Header;

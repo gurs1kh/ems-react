@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
-import Dialog from 'material-ui/Dialog';
-import FlatButton from 'material-ui/FlatButton';
-import TextField from 'material-ui/TextField';
-import DatePicker from 'material-ui/DatePicker';
-import TimePicker from 'material-ui/TimePicker';
+import { Dialog, FlatButton, TextField, DatePicker, TimePicker } from 'material-ui';
 
-class AddEventModal extends Component {
+class AddBookingModal extends Component {
   constructor(props) {
     super(props);
     this.onSubmit = props.onSubmit;
@@ -24,8 +20,8 @@ class AddEventModal extends Component {
     }
   }
 
-  updateState = (key, value, isEvent) => {
-    if (isEvent) {
+  updateState = (key, value, isBooking) => {
+    if (isBooking) {
       value = value.target.value;
     }
     let stateUpdate = {};
@@ -58,20 +54,20 @@ class AddEventModal extends Component {
      <FlatButton label="Submit" primary={true} disabled={!this.state.complete} onClick={this.submit} />,
     ];
     return (
-      <Dialog title="Add Event" open={this.props.show} modal={false} actions={actions} >
+      <Dialog title="Add Booking" open={this.props.show} modal={false} actions={actions} >
         <TextField  hintText="Event Name"
-                    onChange={(event) => this.updateState('eventName', event, true)} />
+                    onChange={(booking) => this.updateState('eventName', booking, true)} />
         <TextField  hintText="Room Name"
-                    onChange={(event) => this.updateState('roomName', event, true)} />
+                    onChange={(booking) => this.updateState('roomName', booking, true)} />
         <DatePicker hintText="Date"
-                    onChange={(event, date) => this.updateState('date', date)} />
+                    onChange={(booking, date) => this.updateState('date', date)} />
         <TimePicker hintText="Start Time"
-                    onChange={(event, time) => this.updateState('startTime', time)} />
+                    onChange={(booking, time) => this.updateState('startTime', time)} />
         <TimePicker hintText="End Time"
-                    onChange={(event, time) => this.updateState('endTime', time)} />
+                    onChange={(booking, time) => this.updateState('endTime', time)} />
       </Dialog>
     );
   }
 }
 
-export default AddEventModal;
+export default AddBookingModal;
