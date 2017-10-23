@@ -53,6 +53,7 @@ class AddBookingModal extends Component {
      <FlatButton label="Cancel" primary={true} onClick={this.close} />,
      <FlatButton label="Submit" primary={true} disabled={!this.state.complete} onClick={this.submit} />,
     ];
+
     return (
       <Dialog title="Add Booking" open={this.props.show} modal={false} actions={actions} >
         <TextField  hintText="Event Name"

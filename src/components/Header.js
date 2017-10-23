@@ -4,10 +4,6 @@ import SearchBar from 'material-ui-search-bar'
 import FontAwesome from 'react-fontawesome'
 import dateFormat from 'dateformat';
 
-const Icon = (props) => (
-  <FontAwesome name={props.name} size={props.size || '2x'} />
-)
-
 class Header extends Component {
   constructor(props) {
     super(props);
@@ -20,10 +16,11 @@ class Header extends Component {
   }
 
   render() {
-    let search = this.state.isSearching
-        ? <SearchBar onChange={this.props.onMakeSearch}
-                     onRequestSearch={function(){}} />
-        : "";
+    let search = "";
+    if (this.state.isSearching) {
+      search = <SearchBar onChange={this.props.onMakeSearch} onRequestSearch={function(){} /*required*/} />;
+    }
+    
     let selectedMonth = dateFormat(this.props.selectedMonth, "mmmm yyyy");
     return (
       <div>
@@ -33,13 +30,17 @@ class Header extends Component {
           title={
             <div className='header' onClick={this.props.onTitleClick}>
               <span>{selectedMonth}</span>
-              <FontAwesome name="chevron-up" />
+              <FontAwesome name='chevron-up' />
             </div>
           }
           iconElementRight={
             <div className="header action-icons">
-              <div onClick={this.toggleSearch}><Icon name='search'/></div>
-              <div onClick={this.props.onToggleAddBooking}><Icon name='plus' /></div>
+              <div onClick={this.toggleSearch}>
+                <FontAwesome name='search' size='2x' />
+              </div>
+              <div onClick={this.props.onToggleAddBooking}>
+                <FontAwesome name='plus' size='2x' />
+              </div>
             </div>
           } />
         { search }

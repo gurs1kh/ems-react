@@ -93,8 +93,7 @@ class App extends Component {
     let calendar = "";
     if (this.state.calendarOpened) {
       calendar = <Calendar onDateSelect={this.updateDateSelected}
-                           onScroll={this.updateSelectedMonth}
-                           />
+                           onScroll={this.updateSelectedMonth} />
     }
 
     return (

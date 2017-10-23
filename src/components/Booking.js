@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import { Divider, ListItem } from 'material-ui';
 import timeLength from 'time-length';
-
-import { formatTime } from '../util/date-util.js';
+import dateFormat from 'dateformat';
 
 class Booking extends Component {
   render() {
     let booking = this.props.booking;
-    let start = new Date(booking.start).getTime();
-    let end = new Date(booking.end).getTime();
-    let startTime = formatTime(start);
-    let endTime = formatTime(end);
-    let length = (end - start >= 0) ? timeLength(end - start) : 0;
+    let start = new Date(booking.start);
+    let end = new Date(booking.end);
+    let startTime = dateFormat(start, "h:MM TT");
+    let endTime = dateFormat(end, "h:MM TT");;
+    let length = timeLength(end - start);
+
     return (
       <div>
         <ListItem className='list-item list'>

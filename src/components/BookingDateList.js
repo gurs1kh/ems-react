@@ -12,6 +12,7 @@ class BookingDateList extends Component {
         <Booking key={i} booking={booking} />
       )
     })
+    
     return (
       <div>
         <DateHeader date={date}/>
