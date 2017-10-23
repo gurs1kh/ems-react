@@ -75,7 +75,6 @@ class App extends Component {
   addBooking = ({ eventName, roomName, date, startTime, endTime }) => {
     let start = parseDateTime(date, startTime);
     let end = parseDateTime(date, endTime);
-    console.log(eventName, roomName, start, end);
     this.setState(function(prev) {
       let bookings = prev.bookings;
       bookings.push({ eventName, roomName, start, end });
