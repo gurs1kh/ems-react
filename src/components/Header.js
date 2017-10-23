@@ -4,7 +4,6 @@ import SearchBar from 'material-ui-search-bar'
 import FontAwesome from 'react-fontawesome'
 import dateFormat from 'dateformat';
 
-
 const Icon = (props) => (
   <FontAwesome name={props.name} size={props.size || '2x'} />
 )
@@ -12,16 +11,16 @@ const Icon = (props) => (
 class Header extends Component {
   constructor(props) {
     super(props);
-    this.state = { searching: false };
+    this.state = { isSearching: false };
   }
 
   toggleSearch = () => {
-    this.setState({ searching: !this.state.searching });
+    this.setState({ isSearching: !this.state.isSearching });
     this.props.toggleSearch();
   }
 
   render() {
-    let search = this.state.searching
+    let search = this.state.isSearching
         ? <SearchBar onChange={this.props.onMakeSearch}
                      onRequestSearch={function(){}} />
         : "";
@@ -43,7 +42,7 @@ class Header extends Component {
               <div onClick={this.props.onToggleAddBooking}><Icon name='plus' /></div>
             </div>
           } />
-        {search}
+        { search }
       </div>
     );
   }

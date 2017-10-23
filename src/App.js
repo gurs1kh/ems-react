@@ -3,7 +3,6 @@ import './App.css';
 import { MuiThemeProvider, getMuiTheme } from 'material-ui/styles';
 
 import { Header, Calendar, BookingList, AddBookingModal } from './components';
-
 import { parseDateTime } from './util/date-util.js';
 
 class App extends Component {
@@ -17,8 +16,8 @@ class App extends Component {
       selectedMonth: Date.now(),
       bookings: bookings,
       currentBookings: bookings,
-      addBooking: false,
-      searching: false,
+      isAddingBooking: false,
+      isSearching: false,
     };
   }
 
@@ -26,7 +25,7 @@ class App extends Component {
     if (this.state.calendarOpened) {
       this.updateDateSelected();
     } else {
-      this.updateDateSelected(Date.now())
+      this.updateDateSelected(Date.now());
     }
     this.setState({ calendarOpened: !this.state.calendarOpened });
   }
@@ -54,7 +53,7 @@ class App extends Component {
   }
 
   toggleSearch = () => {
-    this.setState({ searching: !this.state.searching });
+    this.setState({ isSearching: !this.state.isSearching });
     this.setState({ currentBookings: this.state.bookings });
   }
 
@@ -69,10 +68,10 @@ class App extends Component {
   }
 
   toggleAddBooking = () => {
-    this.setState({ addBooking: !this.state.addBooking });
+    this.setState({ isAddingBooking: !this.state.isAddingBooking });
   }
 
-  addBooking = ({ eventName, roomName, date, startTime, endTime }) => {
+  isAddingBooking = ({ eventName, roomName, date, startTime, endTime }) => {
     let start = parseDateTime(date, startTime);
     let end = parseDateTime(date, endTime);
     this.setState(function(prev) {
@@ -101,9 +100,9 @@ class App extends Component {
     return (
       <MuiThemeProvider muiTheme={getMuiTheme()}>
         <div id="app">
-          <AddBookingModal show={this.state.addBooking}
+          <AddBookingModal show={this.state.isAddingBooking}
                          onClose={this.toggleAddBooking}
-                         onSubmit={this.addBooking} />
+                         onSubmit={this.isAddingBooking} />
           <Header onTitleClick={this.toggleCalendar}
                   selectedMonth={this.state.selectedMonth}
                   toggleSearch={this.toggleSearch}
@@ -112,7 +111,7 @@ class App extends Component {
           { calendar }
           <BookingList bookings={this.state.currentBookings}
                      isCalendarOpened={this.state.calendarOpened}
-                     isSearching={this.state.searching}/>
+                     isSearching={this.state.isSearching}/>
         </div>
       </MuiThemeProvider>
     );
